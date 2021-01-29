@@ -19,14 +19,12 @@ public class Main {
         Gson gson = new Gson();
         JSONObject tmpJsonObject = gson.fromJson(tmpData, JSONObject.class);
 
-        ArrayList<JsonObject> tickets = new ArrayList<>();
+        ArrayList<Ticket> tickets = new ArrayList<>();
 
-        for (Object t: (ArrayList) tmpJsonObject.get("tickets")) {
-            JsonObject ticket = gson.toJsonTree(t).getAsJsonObject();
+        for (Object o: (ArrayList) tmpJsonObject.get("tickets")) {
+            JsonObject tmpTicket = gson.toJsonTree(o).getAsJsonObject();
+            Ticket ticket = gson.fromJson(tmpTicket, Ticket.class);
             tickets.add(ticket);
-            System.out.println(ticket.get("arrival_date"));
         }
-
-
     }
 }
