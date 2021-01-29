@@ -23,6 +23,7 @@ public class Main {
 
         Gson gson = new Gson();
         JSONObject tmpJsonObject = gson.fromJson(tmpData, JSONObject.class);
+//        JSONObject tpm2 = gson.toJsonTree(tmpData).getAsJsonObject();
 
         ArrayList<Integer> minOnWayArray = new ArrayList<>();
 
