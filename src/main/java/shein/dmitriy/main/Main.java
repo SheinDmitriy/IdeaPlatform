@@ -4,8 +4,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -17,7 +17,8 @@ public class Main {
     public static void main(String[] args) throws IOException, ParseException {
         int average = 0;
         JSONParser parser = new JSONParser();
-        JSONObject jsonTickets = (JSONObject) parser.parse(new FileReader("tickets.json"));
+
+        JSONObject jsonTickets = (JSONObject) parser.parse( new InputStreamReader( new FileInputStream("tickets.json"), StandardCharsets.UTF_8));
 
         ArrayList<Integer> minOnWayArray = new ArrayList<>();
 
@@ -38,9 +39,9 @@ public class Main {
             average += minOnWay;
         }
         average = average / minOnWayArray.size();
-        System.out.println("РЎСЂРµРґРЅРµРµ РІСЂРµРјСЏ РІ РїСѓС‚Рё: " + average / 60 + ":" + average % 60);
+        System.out.println("Среднее время в пути: " + average / 60 + ":" + average % 60);
         Collections.sort(minOnWayArray);
         int indexPercentiles = minOnWayArray.size() * 90 / 100;
-        System.out.println("90-Р№ РїСЂРѕС†РµРЅС‚РёР»СЊ: " + minOnWayArray.get(indexPercentiles - 1) / 60 + ":" + minOnWayArray.get(indexPercentiles - 1) % 60);
+        System.out.println("90-й процентиль: " + minOnWayArray.get(indexPercentiles - 1) / 60 + ":" + minOnWayArray.get(indexPercentiles - 1) % 60);
     }
 }
