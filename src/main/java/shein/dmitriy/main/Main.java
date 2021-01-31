@@ -33,17 +33,14 @@ public class Main {
             String[] arrivalTime = ticket.get("arrival_time").toString().split(":");
 
             int minOnWay =  60 * 24 * period.getDays() - 60 * Integer.parseInt(departureTime[0]) - Integer.parseInt(departureTime[1])
-                    + 60 * Integer.parseInt(arrivalTime[0]) + Integer.parseInt(arrivalTime[1]);
+                    + 60 * Integer.parseInt(arrivalTime[0]) + Integer.parseInt(arrivalTime[1]) + 540;
             minOnWayArray.add(minOnWay);
             average += minOnWay;
-            System.out.println(minOnWayArray);
         }
         average = average / minOnWayArray.size();
         System.out.println("Среднее время в пути: " + average / 60 + ":" + average % 60);
         Collections.sort(minOnWayArray);
-        System.out.println(minOnWayArray);
         int indexPercentiles = minOnWayArray.size() * 90 / 100;
-        System.out.println("90-й процентиль: " + minOnWayArray.get(indexPercentiles - 1));
-
+        System.out.println("90-й процентиль: " + minOnWayArray.get(indexPercentiles - 1) / 60 + ":" + minOnWayArray.get(indexPercentiles - 1) % 60);
     }
 }
